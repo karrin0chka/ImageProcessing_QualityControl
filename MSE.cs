@@ -14,11 +14,6 @@ namespace ОИ_Практика1
         public static double CalculateMSE(Bitmap image1, Bitmap image2)
         {
             {
-                if (image1.Size != image2.Size)
-                {
-                    throw new ArgumentException("Изображения должны иметь одинаковый размер.");
-                }
-
                 double mse = 0.0;
                 for (int x = 0; x < image1.Width; x++)
                 {
@@ -27,11 +22,7 @@ namespace ОИ_Практика1
                         Color pixel1 = image1.GetPixel(x, y);
                         Color pixel2 = image2.GetPixel(x, y);
 
-                        double deltaR = pixel1.R - pixel2.R;
-                        double deltaG = pixel1.G - pixel2.G;
-                        double deltaB = pixel1.B - pixel2.B;
-
-                        mse += (deltaR * deltaR + deltaG * deltaG + deltaB * deltaB) / 3.0;
+                        mse += Math.Pow((pixel1.R + pixel1.G + pixel1.B) / 3.0 - (pixel2.R + pixel2.G + pixel2.B) / 3.0, 2);
                     }
                 }
 
